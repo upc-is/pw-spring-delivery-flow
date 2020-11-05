@@ -40,6 +40,9 @@ public class Producto {
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 	
+	@Column(name ="url_image", length = 100)
+	private String urlImage;
+	
 	@ManyToMany(mappedBy = "productos")	
 	private List<Proveedor> proveedores;
 	

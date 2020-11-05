@@ -9,17 +9,15 @@
 	<section class="container">
 		<h3>Resultado de la Búsqueda: <span th:text="${producto.descripcion}"></span></h3>
 		
-		<ul>
-			<li th:each="producto : ${productos}">
-				<span th:text="${producto.descripcion}"></span>
-			</li>
-		</ul>
-		
 		<div style="display:flex;">
 			<div th:each="producto : ${productos}" class="card" style="width: 18rem; margin:10px;">
-			  <img th:src="@{/images/zapato.jpg}" class="card-img-top" alt="...">
+			  <img th:src="@{${producto.urlImage} + ${producto.id} + '.jpg'}" class="card-img-top" alt="...">
 			  <div class="card-body">
-			    <h5 class="card-title" th:text="${producto.descripcion}"></h5>
+			    <h5 class="card-title" >
+			    	<a th:href="@{'/productos/' + ${producto.tag} + '-' + ${producto.id} + '/p' }">
+			    		<span th:text="${producto.descripcion}"></span>
+			    	</a>
+			    </h5>
 			    <h6 class="card-subtitle mb-2 text-muted" th:text="${producto.marca}"></h6>
 			    <p class="card-text text-right " th:text="'S/ ' + ${producto.precioVenta}"></p>			    
 			  </div>

@@ -43,6 +43,9 @@ public class Producto {
 	@Column(name ="url_image", length = 100)
 	private String urlImage;
 	
+	@Column(name = "tag", length = 50)
+	private String tag;
+	
 	@ManyToMany(mappedBy = "productos")	
 	private List<Proveedor> proveedores;
 	
@@ -124,6 +127,22 @@ public class Producto {
 
 	public void setDetallePedidos(List<DetallePedido> detallePedidos) {
 		this.detallePedidos = detallePedidos;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
 	

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Delivery - View Product</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+	<section class="container">
+		
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item">Home</li>
+		    <li class="breadcrumb-item" th:text="${productoVenta.categoria.denominacion}" >Library</li>
+		    <li class="breadcrumb-item active" aria-current="page" th:text="${productoVenta.descripcion}">Data</li>
+		  </ol>
+		</nav>
+		<div style="display:flex; width: 90%; margin-left: 20px;">
+			<div class="card" style="width: 50%;">
+			  <div class="card-body">
+			    <img th:src="@{${productoVenta.urlImage} + ${productoVenta.id} + '_large.jpg'}" class="card-img-top" alt="...">
+			  </div>
+			</div>
+			<div class="card" style="width: 50%;">
+			  <h5 class="card-header" th:text="${productoVenta.descripcion}">descripcion</h5>
+			  <div class="card-body">
+			    <h5 class="card-title" >
+			    	Precio: S/ <span th:text="${productoVenta.precioVenta}"></span>
+			    </h5>
+			    <p class="card-text">
+			    	Marca: <span th:text="${productoVenta.marca}"></span>
+			    </p>
+			    <p class="card-text">
+			    	DetallePedido: <span th:text="${detallePedido.producto.descripcion}"></span>
+			    </p>
+			    
+			    <form th:action="@{/pedidos/adddetail}" th:object="${detallePedido}" method="post">
+	  				<div class="form-group row">
+	  					<label for="proveedor" class="col-sm-3 col-form-label">Proveedor: </label>
+    					<div class="col-sm-9">
+		  					<select th:field="*{proveedor}" class="form-control">
+						    	<option th:each="proveedor : ${productoVenta.proveedores}" 
+						      		th:value="${proveedor.id}" th:text="${proveedor.nombre}"></option>
+							</select>
+						</div>						
+	  				</div>
+	  				<div class="form-group row">
+	  					<label for="proveedor" class="col-sm-3 col-form-label">Cantidad: </label>
+    					<div class="col-sm-9">
+		  					<input type="number" class="form-control" th:field="*{cantidad}" placeholder="">
+						</div>						
+	  				</div>
+	  				<div class="form-group text-center">
+				  		<button type="submit" class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Agregar al Carrito</button>
+				  	</div>				  
+				</form>
+			    
+			  </div>
+			</div>
+		</div>
+		
+	</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

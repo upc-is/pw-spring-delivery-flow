@@ -24,4 +24,9 @@ public class IndexController {
 	public String template( ) {
 		return "template";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 }

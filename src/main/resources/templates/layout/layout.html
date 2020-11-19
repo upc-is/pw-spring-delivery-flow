@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head(title)">
 	<meta charset="utf-8">
@@ -32,11 +33,31 @@
 		  
 		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		    <div class="navbar-nav">
-		      <a class="nav-link" href="#">Cuenta</span></a>
-		      <a class="nav-link" href="#">Mis pedidos</a>
+		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_CUSTOMER')">
+		      	Mis pedidos
+		      </a>
+		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_PROVIDER')">
+		      	Mis entregas
+		      </a>
 		      <a class="nav-link" href="#">Proveedores</a>
-		      <a class="nav-link" href="#">Carrito de compras</a>
-		      <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
+		      <a class="nav-link" href="#" sec:authorize="hasAuthority('ACCESS_DESC')">Descuentos</a>
+		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_CUSTOMER')">Carrito de compras</a>
+		      <a class="btn btn-outline-warning" th:href="@{/login}" sec:authorize="isAnonymous()">
+		      	Inicia Sesión
+		      </a>
+		      <ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()">			      
+			      <li class="nav-item dropdown">
+			        <a class="nav-link dropdown-toggle btn btn-outline-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          <span sec:authentication="name"></span>
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" th:href="@{/perfil}">Ver Perfil</a>
+			          <div class="dropdown-divider"></div>
+			          <a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a>
+			        </div>
+			      </li>
+
+			</ul>
 		    </div>
 		  </div>
 		</nav>

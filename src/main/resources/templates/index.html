@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head(~{::title})">
 	<title>Delivery - Template</title>
 </head>
@@ -9,10 +10,15 @@
 	<section class="container">
 		
 		<div class="jumbotron">
-		  <h1 class="display-4">Bienvenidos a Sistema de Delivery</h1>
+		  <h1 class="display-4" >Bienvenidos a Sistema de Delivery</h1>
 		  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 		  <hr class="my-4">
-		  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+		  <p sec:authorize="hasRole('ROLE_PROVIDER')">
+		  	Haga click en <strong>Mis entregas</strong> para ver los pedidos de los clientes.
+		  </p>
+		  <p href="#" sec:authorize="hasRole('ROLE_CUSTOMER')">
+		  	Haga click en <strong>Mis pedidos</strong> para ver el estado de sus pedidos.
+		  </p>
 		  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
 		</div>
 		

@@ -12,11 +12,17 @@ import pe.edu.upc.delivery.models.entities.Producto;
 @RequestMapping("/")
 @SessionAttributes("producto")
 public class IndexController {
+	
+	
+	
 	// GET y POST
 	@GetMapping
 	public String index(Model model) {
 		Producto producto = new Producto();
 		model.addAttribute("producto", producto);
+		
+		
+		
 		return "index";
 	}
 	

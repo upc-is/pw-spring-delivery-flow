@@ -33,7 +33,7 @@
 		  
 		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		    <div class="navbar-nav">
-		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_CUSTOMER')">
+		      <a class="nav-link" th:href="@{/pedidos/mis}" sec:authorize="hasRole('ROLE_CUSTOMER')">
 		      	Mis pedidos
 		      </a>
 		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_PROVIDER')">
@@ -41,7 +41,9 @@
 		      </a>
 		      <a class="nav-link" href="#">Proveedores</a>
 		      <a class="nav-link" href="#" sec:authorize="hasAuthority('ACCESS_DESC')">Descuentos</a>
-		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_CUSTOMER')">Carrito de compras</a>
+		      <a class="nav-link" href="#" sec:authorize="hasRole('ROLE_CUSTOMER')">
+		      	Carrito de compras <span class="badge badge-light">4</span>
+		      </a>
 		      <a class="btn btn-outline-warning" th:href="@{/login}" sec:authorize="isAnonymous()">
 		      	Inicia Sesión
 		      </a>

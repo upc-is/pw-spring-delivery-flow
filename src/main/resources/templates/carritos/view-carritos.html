@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head(~{::title})">
-	<title>Delivery - Mis pedidos</title>
+	<title>Delivery - Mis carritos de Compras</title>
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
@@ -12,21 +12,25 @@
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item">Cliente</li>
 		    <li class="breadcrumb-item active" aria-current="page" >
-		    	Mis pedidos <span class="badge badge-light" th:text="${#lists.size(cliente.pedidos)}">2</span>
+		    	Carritos de compra 
+		    	<span class="badge badge-light" th:text="${#lists.size(pedidos)}">2</span>
 		    </li>
 		  </ol>
 		</nav>
 		
 		<div style="display:flex;">
-			<div th:each="pedido : ${cliente.pedidos}" th:if="${{pedido.estadoPedido}} != 'CARRITO'" class="card border-danger mb-3" 
+			<div th:each="pedido : ${pedidos}" class="card border-success mb-3" 
 				style="width: 18rem; margin:10px;">
-			  <div class="card-header text-white bg-danger" > Pedido Nro: <span th:text="${pedido.id}"></span> </div>
+			  <div class="card-header text-white bg-success" > Pedido Nro: <span th:text="${pedido.id}"></span> </div>
 			  <div class="card-body">
 			    <h5 class="card-title"> Estado: <span th:text="${pedido.estadoPedido}"></span> </h5>
 			    <p class="card-text">Fecha: <span th:text="${pedido.fechaPedido}"></span></p>
 			    <p class="card-text">Precio: <strong>S/<span th:text="${pedido.precioTotal}"></span></strong></p>
 			    <p class="card-text"></p>
-			    <a th:href="@{'/pedidos/' + ${pedido.id} + '/d'}" class="btn btn-info">Ver detalle</a>
+			    <a th:href="@{'/carritos/' + ${pedido.id} + '/d'}" class="btn btn-info">Ver detalle</a>
+			    <a th:href="@{'/carritos/' + ${pedido.id} + '/buy'}" class="btn btn-success">
+			    	<i class="fas fa-cash-register"></i> Comprar
+			    </a>
 			  </div>
 			</div>
 		</div>

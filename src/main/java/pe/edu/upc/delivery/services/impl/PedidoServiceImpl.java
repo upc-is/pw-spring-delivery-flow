@@ -52,7 +52,7 @@ public class PedidoServiceImpl implements PedidoService, Serializable {
 	}
 
 	@Override
-	public Optional<Pedido> findByClienteAndEstadoPedido(Integer id, EstadoPedido estadoPedido) throws Exception {
+	public List<Pedido> findByClienteAndEstadoPedido(Integer id, EstadoPedido estadoPedido) throws Exception {
 		return pedidoRepository.findByClienteAndEstadoPedido(id, estadoPedido);
 	}
 	

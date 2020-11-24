@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Delivery - Mis entregas</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+	<section class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item">Proveedor</li>
+		    <li class="breadcrumb-item" >Mis Entregas</li>
+		    <li class="breadcrumb-item active" aria-current="page" >Detalle de entregas</li>
+		  </ol>
+		</nav>
+		
+		<div style="display:flex; flex-wrap: wrap;">
+			<div th:each="detallePedido : ${detallePedidos}" class="card border-primary" style="max-width: 530px; margin:10px;">
+				<div class="card-header text-white bg-primary" > 
+					Pedido Nro <span th:text="${detallePedido.pedido.id}"></span>: 
+					<span class="font-weight-bold" th:text="${detallePedido.producto.descripcion}"></span>
+				</div>
+				<div class="row no-gutters">
+					<div class="col-md-4">
+				      <img th:src="@{${detallePedido.producto.urlImage} + ${detallePedido.producto.id} + '.jpg'}" class="card-img-top" alt="...">
+				    </div>
+				    <div class="col-md-8">
+				      			  
+					  <div class="card-body">
+					    
+					    <h6 class="card-subtitle" >
+					    	Estado: <span th:text="${detallePedido.pedido.estadoPedido}"></span>
+					    </h6>
+					    <p class="card-text text-right font-weight-bold" th:text="'S/ ' + ${detallePedido.precio}"></p>
+					    <p class="card-text">
+					    	<strong>cliente: </strong>
+					    		<span th:text="${detallePedido.pedido.cliente.nombres}"></span>
+					    		<span th:text="${detallePedido.pedido.cliente.apellidos}"></span> <br>
+							<strong>Dirección: </strong>
+					    		<span th:text="${detallePedido.pedido.cliente.direccion}"></span> <br> 
+					    	<strong>Distrito: </strong>
+					    		<span th:text="${detallePedido.pedido.cliente.distrito.nombre}"></span> <br>   
+					    	<strong>Celular: </strong>
+					    		<span th:text="${detallePedido.pedido.cliente.celular}"></span> <br>	
+					    	<strong>Correo: </strong>
+					    		<span th:text="${detallePedido.pedido.cliente.correo}"></span>	
+					    </p>					    			    
+					  </div>				    
+				    </div>
+				</div>	
+				<div class="card-footer">
+				  <a th:if="${{detallePedido.pedido.estadoPedido}} == 'PAGADO'" th:href="@{'/entregas/' + ${detallePedido.id} + '/enviar'}" class="btn btn-warning">
+				  	<i class="fas fa-shipping-fast"></i> Enviar producto
+				  </a>
+				  <a th:if="${{detallePedido.pedido.estadoPedido}} == 'ENRUTA'" th:href="@{'/entregas/' + ${detallePedido.id} + '/entregar'}" class="btn btn-success">
+				  	<i class="fas fa-truck-loading"></i> Entregar producto
+				  </a>
+				</div>		  
+			</div>
+		</div>
+		
+		
+	</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
